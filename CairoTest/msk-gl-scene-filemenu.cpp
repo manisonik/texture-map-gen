@@ -31,9 +31,12 @@ void MSceneFileMenu::OnRender(MskObject* sender, EventArgs* e)
 	// Draw the grid
 	m_pLineRenderer->Begin();
 	m_pLineRenderer->SetProjectionMatrix(m_pSceneCamera->GetModelViewProjectionMatrix());
-	m_pLineRenderer->Draw(m_pMeshCube);
+	if (m_bHitTest) {
+		m_pLineRenderer->Draw(m_pMeshCube);
+	}
 	m_pLineRenderer->Draw(m_pMeshGrid);
 	m_pLineRenderer->End();
+
 
 	// Begin rendering UI
 	m_pShapeRenderer->Begin();
@@ -100,19 +103,27 @@ void MSceneFileMenu::OnKeyUp(MskObject* sender, KeyEventArgs* e)
 
 void MSceneFileMenu::OnMouseMove(MskObject* sender, MouseEventArgs* e)
 {
-	m_pRay = m_pCamera->GetRay(e->x, e->y);
+	m_pRay = m_pSceneCamera->GetRay(e->x, e->y);
 
 	// Loop through meshes
 	std::vector<MskFace> faces = m_pMeshCube->GetFaces();
 	std::vector<glm::vec3> vertices = m_pMeshCube->GetVertices();
-	for (auto it = faces.begin(); it != faces.end(); ++it) {
-		glm::vec3 v0 = glm::vec3(glm::vec4(vertices[it->indices[0]], 1.0f) * m_pMeshCube->GetModelMatrix());
-		glm::vec3 v1 = glm::vec3(glm::vec4(vertices[it->indices[1]], 1.0f) * m_pMeshCube->GetModelMatrix());
-		glm::vec3 v2 = glm::vec3(glm::vec4(vertices[it->indices[2]], 1.0f) * m_pMeshCube->GetModelMatrix());
 
-		glm::vec3 bary;
-		if (m_pRay->Intersect(v0, v1, v2, bary)) {
-			::OutputDebugString("Hit!\n");
+	m_bHitTest = 0;
+	for (auto it = faces.begin(); it != faces.end(); ++it) {
+		if (it->indices.size() % 3 == 0) {
+			glm::vec3 v0 = glm::vec3(glm::vec4(vertices[it->indices[0]], 1.0f) * m_pMeshCube->GetModelMatrix());
+			glm::vec3 v1 = glm::vec3(glm::vec4(vertices[it->indices[1]], 1.0f) * m_pMeshCube->GetModelMatrix());
+			glm::vec3 v2 = glm::vec3(glm::vec4(vertices[it->indices[2]], 1.0f) * m_pMeshCube->GetModelMatrix());
+
+			glm::vec3 v3 = glm::vec3(glm::vec4(vertices[it->indices[3]], 1.0f) * m_pMeshCube->GetModelMatrix());
+			glm::vec3 v4 = glm::vec3(glm::vec4(vertices[it->indices[4]], 1.0f) * m_pMeshCube->GetModelMatrix());
+			glm::vec3 v5 = glm::vec3(glm::vec4(vertices[it->indices[5]], 1.0f) * m_pMeshCube->GetModelMatrix());
+
+			glm::vec3 bary;
+			if (m_pRay->Intersect(v0, v1, v2, bary) || m_pRay->Intersect(v3, v4, v5, bary)) {
+				m_bHitTest++;
+			}
 		}
 	}
 }
@@ -146,11 +157,11 @@ MSceneFileMenu::MSceneFileMenu(MskApp* mskApp)
 	m_pCliffHeight->SetFilter(MskTextureFilter::MipMapLinearLinear, MskTextureFilter::MipMapLinearLinear);
 	m_pCliffHeight->LoadFromFile("cliff02_disp.png");
 
-	// Get ray
-	m_pRay = m_pCamera->GetRay(0.0f, 0.0f);
-
 	// Store camera
 	m_pSceneCamera = mskApp->GetCamera();
+
+	// Get ray
+	m_pRay = m_pSceneCamera->GetRay(0.0f, 0.0f);
 
 	// Enable lighting
 	m_pScene->EnableLighting(true);

@@ -11,7 +11,7 @@ MCamera::MCamera()
 	m_matMVP = glm::mat4(1.0f);
 	m_mouseSensitivity = 0.5f;
 	m_FOV = 45.0f;
-	m_fSpeed = 5.0f;
+	m_fSpeed = 10.0f;
 	m_Yaw = -90.0f;
 	m_Pitch = 0.0f;
 	m_bFirstMouse = true;
@@ -182,15 +182,17 @@ void MCamera::SetModelMatrix(glm::mat4 modelMatrix)
 
 std::shared_ptr<MskRay> MCamera::GetRay(int mouseX, int mouseY)
 {
-	glm::vec2 ray_nds = glm::vec2(mouseX, mouseY);
-	glm::vec4 ray_clip = glm::vec4(ray_nds.x, ray_nds.y, -1.0f, 1.0f);
-	glm::mat4 invProjMat = glm::inverse(m_matProjection);
-	glm::vec4 eyeCoords = invProjMat * ray_clip;
-	eyeCoords = glm::vec4(eyeCoords.x, eyeCoords.y, -1.0f, 0.0f);
-	glm::mat4 invViewMat = glm::inverse(m_matView);
-	glm::vec4 rayWorld = invViewMat * eyeCoords;
-	glm::vec3 rayDirection = glm::normalize(glm::vec3(rayWorld));
+	GLfloat x = (2.0f * mouseX) / m_nWidth - 1.0f;
+	GLfloat y = 1.0f - (2.0f * mouseY) / m_nHeight;
 
-	m_pRay->SetDirection(rayDirection);
+	glm::vec4 ray_clip = glm::vec4(x, y, -1.0, 1.0);
+	glm::vec4 ray_eye = glm::inverse(m_matProjection) * ray_clip;
+	ray_eye = glm::vec4(ray_eye.x, ray_eye.y, -1.0, 0.0);
+	glm::vec3 ray_wor = glm::vec3(glm::inverse(m_matView) * ray_eye);
+	glm::vec3 ray_dir = glm::normalize(ray_wor);
+
+	m_pRay->SetOrigin(m_vecPos);
+	m_pRay->SetDirection(ray_dir);
+
 	return m_pRay;
 }

@@ -26,6 +26,7 @@ private:
 	std::vector<std::shared_ptr<MskMesh>> m_vButtons;
 	std::shared_ptr<MskRay> m_pRay;
 
+	GLuint m_bHitTest;
 	GLfloat m_nWidth;
 	GLfloat m_nHeight;
 
