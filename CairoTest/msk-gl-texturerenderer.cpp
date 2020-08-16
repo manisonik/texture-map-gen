@@ -13,6 +13,8 @@ MTextureRenderer::MTextureRenderer() :
 	// Generate Vertex Attribute Object
 	glGenVertexArrays(1, &m_hVAO);
 	glGenBuffers(1, &m_hVBO);
+	glGenBuffers(1, &m_hBNBO);
+	glGenBuffers(1, &m_hTNBO);
 	glGenBuffers(1, &m_hTBO);
 	glGenBuffers(1, &m_hNBO);
 	glGenBuffers(1, &m_hCBO);
@@ -26,6 +28,8 @@ MTextureRenderer::~MTextureRenderer()
 {
 	glDeleteBuffers(1, &m_hVBO);
 	glDeleteBuffers(1, &m_hTBO);
+	glDeleteBuffers(1, &m_hBNBO);
+	glDeleteBuffers(1, &m_hTNBO);
 	glDeleteBuffers(1, &m_hNBO);
 	glDeleteBuffers(1, &m_hCBO);
 	glDeleteBuffers(1, &m_hIBO);
@@ -60,9 +64,9 @@ GLvoid MTextureRenderer::InitShaders() {
 	MskFactory::CreateShader(MskShaderType::Fragment, m_pMaterialTextureFS);
 	MskFactory::CreateShaderProgram(m_pMaterialTextureSP);
 
-	m_pMaterialTextureVS->LoadFromFile(".\\pom_texture.glvs");
+	m_pMaterialTextureVS->LoadFromFile(".\\material_texture.glvs");
 	m_pMaterialTextureVS->Compile();
-	m_pMaterialTextureFS->LoadFromFile(".\\pom_texture.glfs");
+	m_pMaterialTextureFS->LoadFromFile(".\\material_texture.glfs");
 	m_pMaterialTextureFS->Compile();
 
 	m_pMaterialTextureSP->AttachShader(m_pMaterialTextureVS);
@@ -71,11 +75,7 @@ GLvoid MTextureRenderer::InitShaders() {
 
 	// Add MVP matrix
 	m_pMaterialTextureSP->AddUniform("MVP");
-
-	// Add view position
 	m_pMaterialTextureSP->AddUniform("viewPos");
-	m_pMaterialTextureSP->AddUniform("heightScale");
-	m_pMaterialTextureSP->AddUniform("lightPos");
 	m_pMaterialTextureSP->AddUniform("viewMatrix");	
 	m_pMaterialTextureSP->AddUniform("modelMatrix");
 	m_pMaterialTextureSP->AddUniform("light.ambient");
@@ -86,6 +86,36 @@ GLvoid MTextureRenderer::InitShaders() {
 	m_pMaterialTextureSP->AddUniform("material.diffuse");
 	m_pMaterialTextureSP->AddUniform("material.specular");
 	m_pMaterialTextureSP->AddUniform("material.shininess");
+
+	// POM
+	MskFactory::CreateShader(MskShaderType::Vertex, m_pPOMTextureVS);
+	MskFactory::CreateShader(MskShaderType::Fragment, m_pPOMTextureFS);
+	MskFactory::CreateShaderProgram(m_pPOMTextureSP);
+
+	m_pPOMTextureVS->LoadFromFile(".\\pom_texture.glvs");
+	m_pPOMTextureVS->Compile();
+	m_pPOMTextureFS->LoadFromFile(".\\pom_texture.glfs");
+	m_pPOMTextureFS->Compile();
+
+	m_pPOMTextureSP->AttachShader(m_pPOMTextureVS);
+	m_pPOMTextureSP->AttachShader(m_pPOMTextureFS);
+	m_pPOMTextureSP->Link();
+
+	// Add MVP matrix
+	m_pPOMTextureSP->AddUniform("MVP");
+	m_pPOMTextureSP->AddUniform("viewPos");
+	m_pPOMTextureSP->AddUniform("heightScale");
+	m_pPOMTextureSP->AddUniform("lightPos");
+	m_pPOMTextureSP->AddUniform("viewMatrix");
+	m_pPOMTextureSP->AddUniform("modelMatrix");
+	m_pPOMTextureSP->AddUniform("light.ambient");
+	m_pPOMTextureSP->AddUniform("light.position");
+	m_pPOMTextureSP->AddUniform("light.diffuse");
+	m_pPOMTextureSP->AddUniform("light.specular");
+	m_pPOMTextureSP->AddUniform("material.ambient");
+	m_pPOMTextureSP->AddUniform("material.diffuse");
+	m_pPOMTextureSP->AddUniform("material.specular");
+	m_pPOMTextureSP->AddUniform("material.shininess");
 }
 
 GLvoid MTextureRenderer::CalculateNormals(
@@ -155,7 +185,9 @@ GLvoid MTextureRenderer::SetCamera(std::shared_ptr<MskCamera>& camera)
 		m_pMaterialTextureSP->SetUniform("modelMatrix", camera->GetModelMatrix());
 		m_pMaterialTextureSP->SetUniform("viewMatrix", camera->GetViewMatrix());
 		
-	} else {
+	} 
+	else 
+	{
 		m_pBasicTextureSP->SetUniform("MVP", camera->GetModelViewProjectionMatrix());
 	}
 }
@@ -171,7 +203,12 @@ GLvoid MTextureRenderer::SetCamera(glm::mat4& matProj)
 
 GLvoid MTextureRenderer::EnableLighting(GLboolean enable)
 {
-	m_bLighting = true;
+	m_bLighting = enable;
+}
+
+GLvoid MTextureRenderer::EnablePOM(GLboolean enable)
+{
+	m_bPOM = enable;
 }
 
 GLvoid MTextureRenderer::Draw(std::shared_ptr<MskMesh>& mesh)
@@ -179,6 +216,9 @@ GLvoid MTextureRenderer::Draw(std::shared_ptr<MskMesh>& mesh)
 	// Store indices
 	m_vIndexData.insert(m_vIndexData.end(), mesh->GetIndices().begin(), mesh->GetIndices().end());
 	m_vVertexData.insert(m_vVertexData.end(), mesh->GetVertices().begin(), mesh->GetVertices().end());
+	m_vNormalData.insert(m_vNormalData.end(), mesh->GetNormals().begin(), mesh->GetNormals().end());
+	m_vTangentData.insert(m_vTangentData.end(), mesh->GetTangents().begin(), mesh->GetTangents().end());
+	m_vBitangentData.insert(m_vBitangentData.end(), mesh->GetBitangents().begin(), mesh->GetBitangents().end());
 	m_vNormalData.insert(m_vNormalData.end(), mesh->GetNormals().begin(), mesh->GetNormals().end());
 	m_vTexCoords.insert(m_vTexCoords.end(), mesh->GetTextureCoords().begin(), mesh->GetTextureCoords().end());
 
@@ -209,17 +249,29 @@ GLvoid MTextureRenderer::Begin()
 		throw std::invalid_argument("MTextureRenderer.End() must be called before Begin().");
 
 	if (m_bLighting) {
-		m_pMaterialTextureSP->Use();
-		m_pMaterialTextureSP->SetUniform("light.ambient", glm::vec3(0.2f, 0.2f, 0.2f));
-		m_pMaterialTextureSP->SetUniform("heightScale", 0.1f);
-		m_pMaterialTextureSP->SetUniform("lightPos", glm::vec3(1.0f, 1.0f, 1.0f));
-		m_pMaterialTextureSP->SetUniform("light.position", glm::vec3(1.0f, 1.0f, 1.0f));
-		m_pMaterialTextureSP->SetUniform("light.diffuse", glm::vec3(0.5f, 0.5f, 0.5f));
-		m_pMaterialTextureSP->SetUniform("light.specular", glm::vec3(0.5f, 0.5f, 0.5f));
-		m_pMaterialTextureSP->SetUniform("material.ambient", 0.2f, 0.2f, 0.2f);
-		m_pMaterialTextureSP->SetUniform("material.diffuse", 1.0f, 1.0f, 1.0f);
-		m_pMaterialTextureSP->SetUniform("material.specular", 0.5f, 0.5f, 0.5f);
-		m_pMaterialTextureSP->SetUniform("material.shininess", 32.0f);
+		if (m_bPOM) {
+			m_pPOMTextureSP->Use();
+			m_pPOMTextureSP->SetUniform("light.ambient", glm::vec3(0.3f, 0.3f, 0.31f));
+			m_pPOMTextureSP->SetUniform("heightScale", 0.01f);
+			m_pPOMTextureSP->SetUniform("lightPos", glm::vec3(0.0f, 0.0f, 2.0));
+			m_pPOMTextureSP->SetUniform("light.position", glm::vec3(1.0f, 1.0f, 1.0f));
+			m_pPOMTextureSP->SetUniform("light.diffuse", glm::vec3(0.5f, 0.5f, 0.5f));
+			m_pPOMTextureSP->SetUniform("light.specular", glm::vec3(0.5f, 0.5f, 0.5f));
+			m_pPOMTextureSP->SetUniform("material.ambient", 0.5f, 0.5f, 0.5f);
+			m_pPOMTextureSP->SetUniform("material.diffuse", 0.5f, 0.5f, 0.5f);
+			m_pPOMTextureSP->SetUniform("material.specular", 0.5f, 0.5f, 0.5f);
+			m_pPOMTextureSP->SetUniform("material.shininess", 32.0f);
+		} else {
+			m_pMaterialTextureSP->Use();
+			m_pMaterialTextureSP->SetUniform("light.ambient", glm::vec3(0.3f, 0.3f, 0.3f));
+			m_pMaterialTextureSP->SetUniform("light.position", glm::vec3(0.0f, 0.0f, 1.0f));
+			m_pMaterialTextureSP->SetUniform("light.diffuse", glm::vec3(0.5f, 0.5f, 0.5f));
+			m_pMaterialTextureSP->SetUniform("light.specular", glm::vec3(0.5f, 0.5f, 0.5f));
+			m_pMaterialTextureSP->SetUniform("material.ambient", 0.5f, 0.5f, 0.5f);
+			m_pMaterialTextureSP->SetUniform("material.diffuse", 0.5f, 0.5f, 0.5f);
+			m_pMaterialTextureSP->SetUniform("material.specular", 0.8f, 0.8f, 0.8f);
+			m_pMaterialTextureSP->SetUniform("material.shininess", 32.0f);
+		}
 	} else {
 		m_pBasicTextureSP->Use();
 	}
@@ -237,6 +289,21 @@ GLvoid MTextureRenderer::Begin(std::shared_ptr<MskTexture>& texture)
 	texture->Bind(0);
 }
 
+GLvoid MTextureRenderer::Begin(
+	std::shared_ptr<MskTexture>& diffuse, 
+	std::shared_ptr<MskTexture>& normal, 
+	std::shared_ptr<MskTexture>& height
+)
+{
+	// Enable POM
+	//m_bPOM = true;
+
+	Begin();
+	diffuse->Bind(0);
+	normal->Bind(1);
+	height->Bind(2);
+}
+
 GLvoid MTextureRenderer::End()
 {
 	if (!m_bDrawing)
@@ -250,11 +317,14 @@ GLvoid MTextureRenderer::End()
 
 	// Disable shader
 	if (m_bLighting) {
-		m_pMaterialTextureSP->Disable();
+		if (m_bPOM) {
+			m_pPOMTextureSP->Disable();
+		} else {
+			m_pMaterialTextureSP->Disable();
+		}
 	} else {
 		m_pBasicTextureSP->Disable();
 	}
-	
 
 	m_bDrawing = false;
 }
@@ -314,6 +384,18 @@ GLvoid MTextureRenderer::Flush()
 	glVertexAttribDivisor(6, 1);
 	glVertexAttribDivisor(7, 1);
 
+	// Tangents
+	glBindBuffer(GL_ARRAY_BUFFER, m_hTNBO);
+	glBufferData(GL_ARRAY_BUFFER, m_vTangentData.size() * sizeof(glm::vec3), &m_vTangentData[0], GL_STATIC_DRAW);
+	glEnableVertexAttribArray(8);
+	glVertexAttribPointer(8, 3, GL_FLOAT, GL_FALSE, sizeof(glm::vec3), (GLvoid*)0);  // Tangents
+
+	// Bitangents
+	glBindBuffer(GL_ARRAY_BUFFER, m_hBNBO);
+	glBufferData(GL_ARRAY_BUFFER, m_vBitangentData.size() * sizeof(glm::vec3), &m_vBitangentData[0], GL_STATIC_DRAW);
+	glEnableVertexAttribArray(9);
+	glVertexAttribPointer(9, 3, GL_FLOAT, GL_FALSE, sizeof(glm::vec3), (GLvoid*)0);  // Bitangents
+
 	glMultiDrawElementsIndirect(GL_TRIANGLES,
 		GL_UNSIGNED_SHORT,
 		nullptr,
@@ -326,6 +408,8 @@ GLvoid MTextureRenderer::Flush()
 	m_vIndirectData.clear();
 	m_vIndexData.clear();
 	m_vNormalData.clear();
+	m_vTangentData.clear();
+	m_vBitangentData.clear();
 	m_vDrawId.clear();
 	m_vModelMatrices.clear();
 	m_vTexCoords.clear();

@@ -16,7 +16,8 @@ struct Light
 	vec3 specular;
 };
 
-layout (binding = 0) uniform sampler2D tex;
+//layout (binding = 0) uniform sampler2D tex;
+uniform sampler2D tex;
 
 // Values that stay constant for the whole mesh
 uniform Material material;

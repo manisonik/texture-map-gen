@@ -157,22 +157,48 @@ GLvoid MLineRenderer::SetProjectionMatrix(glm::mat4& matProj)
 GLvoid MLineRenderer::Draw(std::shared_ptr<MskMesh>& mesh)
 {
 	// Store indices
-	m_vIndexData.insert(m_vIndexData.end(), mesh->GetIndices().begin(), mesh->GetIndices().end());
+	//m_vIndexData.insert(m_vIndexData.end(), mesh->GetIndices().begin(), mesh->GetIndices().end());
 	m_vVertexData.insert(m_vVertexData.end(), mesh->GetVertices().begin(), mesh->GetVertices().end());
 
-	m_vIndirectData = {
-			{
-				m_vIndexData.size(), // Vertex Count
-				1,					 // Instance Count
-				0,					 // FirstIndex
-				m_nBaseVertex,		 // BaseVertex
-				m_nInstanceBase		 // BaseInstance
-			}
-	};
+	GLuint indexCount = 0;
+	for (auto face = mesh->GetFaces().begin(); face != mesh->GetFaces().end(); ++face)
+	{
+		if (face->indices.size() == 2)
+		{
+			m_vIndexData.push_back(face->indices[0]);
+			m_vIndexData.push_back(face->indices[1]);
+			indexCount += 2;
+		}
+		else if (face->indices.size() == 6)
+		{
+			m_vIndexData.push_back(face->indices[0]);
+			m_vIndexData.push_back(face->indices[1]);
+			m_vIndexData.push_back(face->indices[0]);
+			m_vIndexData.push_back(face->indices[2]);
+			m_vIndexData.push_back(face->indices[1]);
+			m_vIndexData.push_back(face->indices[2]);
+			m_vIndexData.push_back(face->indices[3]);
+			m_vIndexData.push_back(face->indices[4]);
+			m_vIndexData.push_back(face->indices[3]);
+			m_vIndexData.push_back(face->indices[5]);
+			m_vIndexData.push_back(face->indices[4]);
+			m_vIndexData.push_back(face->indices[5]);
+			indexCount += 12;
+		}
+	}
+
+	m_vIndirectData.push_back( DrawElementsCommand {
+				indexCount,			// Vertex Count
+				1,					// Instance Count
+				m_nFirstIndex,		// FirstIndex
+				m_nBaseVertex,		// BaseVertex
+				m_nInstanceBase		// BaseInstance
+		});
 	
 	m_vColor.push_back(mesh->GetColor());
 	m_vModelMatrices.push_back(mesh->GetModelMatrix());
-	m_nBaseVertex += m_vVertexData.size() / 8;
+	m_nBaseVertex += mesh->GetVertices().size();
+	m_nFirstIndex += indexCount;
 	m_nInstanceBase++;
 }
 
@@ -187,24 +213,24 @@ GLvoid MLineRenderer::Flush()
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(glm::vec3), (GLvoid*)0);  // Position
 
-	// Color Buffer
-	glBindBuffer(GL_ARRAY_BUFFER, m_hCBO);
-	glBufferData(GL_ARRAY_BUFFER, m_vColor.size() * sizeof(glm::vec4), &m_vColor[0], GL_STATIC_DRAW);
-	glEnableVertexAttribArray(1);
-	glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(glm::vec4), (GLvoid*)0); // Color
-	glVertexAttribDivisor(1, 1); // only once per instance
+	glBindBuffer(GL_DRAW_INDIRECT_BUFFER, m_hIndirectBO);
+	glBufferData(GL_DRAW_INDIRECT_BUFFER, m_vIndirectData.size() * sizeof(DrawElementsCommand), &m_vIndirectData[0], GL_STATIC_DRAW);
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_hIBO);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_vIndexData.size() * sizeof(GLushort), &m_vIndexData[0], GL_STATIC_DRAW);
-
-	glBindBuffer(GL_DRAW_INDIRECT_BUFFER, m_hIndirectBO);
-	glBufferData(GL_DRAW_INDIRECT_BUFFER, m_vIndirectData.size() * sizeof(DrawElementsCommand), &m_vIndirectData[0], GL_STATIC_DRAW);
 
 	//feed the instance id to the shader.
 	glBindBuffer(GL_ARRAY_BUFFER, m_hIndirectBO);
 	glEnableVertexAttribArray(2);
 	glVertexAttribIPointer(2, 1, GL_UNSIGNED_INT, sizeof(DrawElementsCommand), (void*)(offsetof(DrawElementsCommand, baseInstance)));
 	glVertexAttribDivisor(2, 1); // only once per instance
+
+	// Color Buffer
+	glBindBuffer(GL_ARRAY_BUFFER, m_hCBO);
+	glBufferData(GL_ARRAY_BUFFER, m_vColor.size() * sizeof(glm::vec4), &m_vColor[0], GL_STATIC_DRAW);
+	glEnableVertexAttribArray(1);
+	glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(glm::vec4), (GLvoid*)0); // Color
+	glVertexAttribDivisor(1, 1); // only once per instance
 
 	glBindBuffer(GL_ARRAY_BUFFER, m_hModelMatrixId);
 	glBufferData(GL_ARRAY_BUFFER, m_vModelMatrices.size() * sizeof(glm::mat4), &m_vModelMatrices[0], GL_STATIC_DRAW);
@@ -231,10 +257,11 @@ GLvoid MLineRenderer::Flush()
 
 	m_vVertexData.clear();
 	m_vIndirectData.clear();
-	m_vColor.clear();
 	m_vIndexData.clear();
+	m_vColor.clear();
 	m_vModelMatrices.clear();
 	m_nBaseVertex = 0;
+	m_nFirstIndex = 0;
 	m_nInstanceBase = 0;
 	m_bFlush = false;
 }

@@ -139,14 +139,12 @@ GLvoid MShapeRenderer::Draw(std::shared_ptr<MskMesh>& mesh)
 	m_vIndexData.insert(m_vIndexData.end(), mesh->GetIndices().begin(), mesh->GetIndices().end());
 	m_vVertexData.insert(m_vVertexData.end(), mesh->GetVertices().begin(), mesh->GetVertices().end());
 
-	m_vIndirectData.insert(m_vIndirectData.end(), {
-		{
-			m_vIndexData.size(), // Vertex Count
+	m_vIndirectData.push_back( DrawElementsCommand {
+			mesh->GetIndices().size(), // Vertex Count
 			1,					 // Instance Count
 			0,					 // FirstIndex
 			m_nBaseVertex,		 // BaseVertex
 			m_nInstanceBase		 // BaseInstance
-		}
 	});
 
 	m_vColor.push_back(mesh->GetColor());

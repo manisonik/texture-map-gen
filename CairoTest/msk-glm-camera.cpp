@@ -148,23 +148,19 @@ void MCamera::SetViewport(int x, int y, int width, int height)
 		height = 1;
 	}
 
-	float fAspect = (float)width / (float)height;
-
 	// Store width and height
 	m_nWidth = width;
 	m_nHeight = height;
 
 	glViewport(x, y, width, height);
-	//m_matProjection = glm::ortho(0.0f, m_fZoom * width, 0.0f, m_fZoom * height);
-	//m_matProjection = glm::ortho(0.0f, m_fZoom * width, m_fZoom * height, 0.0f);
 	
 	if (mode == 0)
 	{
 		m_matProjection = glm::ortho(-width/2.0f, width/2.0f, -height/2.0f, height/2.0f);
-		//m_matProjection = glm::ortho(-1.0f, 1.0f, -1.0f, 1.0f);
 	}
-	else 
+	else
 	{
+		float fAspect = (float)width / (float)height;
 		m_matProjection = glm::perspective(
 			glm::radians(m_FOV),
 			fAspect,
@@ -186,15 +182,15 @@ void MCamera::SetModelMatrix(glm::mat4 modelMatrix)
 
 std::shared_ptr<MskRay> MCamera::GetRay(int mouseX, int mouseY)
 {
-	float x = mouseX / (m_nWidth * 0.5f) - 1.0f;
-	float y = mouseY / (m_nHeight * 0.5f) - 1.0f;
+	glm::vec2 ray_nds = glm::vec2(mouseX, mouseY);
+	glm::vec4 ray_clip = glm::vec4(ray_nds.x, ray_nds.y, -1.0f, 1.0f);
+	glm::mat4 invProjMat = glm::inverse(m_matProjection);
+	glm::vec4 eyeCoords = invProjMat * ray_clip;
+	eyeCoords = glm::vec4(eyeCoords.x, eyeCoords.y, -1.0f, 0.0f);
+	glm::mat4 invViewMat = glm::inverse(m_matView);
+	glm::vec4 rayWorld = invViewMat * eyeCoords;
+	glm::vec3 rayDirection = glm::normalize(glm::vec3(rayWorld));
 
-	glm::mat4 invVP = glm::inverse(m_matProjection * m_matView);
-	glm::vec4 screenPos = glm::vec4(x, -y, 1.0f, 1.0f);
-
-	m_pRay->SetDirection(
-		glm::normalize(glm::vec3(invVP * screenPos)
-		));
-
+	m_pRay->SetDirection(rayDirection);
 	return m_pRay;
 }

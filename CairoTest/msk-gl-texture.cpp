@@ -14,6 +14,8 @@ MTexture::MTexture(MskApp* app) :
 	m_pMskApp(app)
 {
 	ilInit();
+	ilEnable(IL_ORIGIN_SET); 
+	ilOriginFunc(IL_ORIGIN_LOWER_LEFT);
 	iluInit();
 	ilutRenderer(ILUT_OPENGL);
 }
@@ -47,7 +49,7 @@ GLboolean MTexture::LoadFromFile(std::string filename) {
 GLboolean MTexture::LoadFromMemory(std::shared_ptr<MskTextureData> textureData)
 {
 	glGenTextures(1, &m_nTextureId);
-	glActiveTexture(GL_TEXTURE0);
+	//glActiveTexture(GL_TEXTURE0);
 	glBindTexture(m_nTarget, m_nTextureId);
 
 	if (m_bMultisampling) 
@@ -122,9 +124,6 @@ void MTexture::SetFilter(MskTextureFilter minFilter, MskTextureFilter magFilter)
 {
 	m_nMinFilter = minFilter;
 	m_nMagFilter = magFilter;
-	//Bind();
-	//glTexParameteri(m_nTarget, GL_TEXTURE_MIN_FILTER, minFilter);
-	//glTexParameteri(m_nTarget, GL_TEXTURE_MAG_FILTER, magFilter);
 }
 
 GLvoid MTexture::EnableMultisampling(GLuint samples)
@@ -138,9 +137,6 @@ void MTexture::SetWrap(MskTextureWrap u, MskTextureWrap v)
 {
 	m_nWrapU = u;
 	m_nWrapV = v;
-	//Bind();
-	//glTexParameteri(m_nTarget, GL_TEXTURE_WRAP_S, u);
-	//glTexParameteri(m_nTarget, GL_TEXTURE_WRAP_T, v);
 }
 
 MTexture::~MTexture()

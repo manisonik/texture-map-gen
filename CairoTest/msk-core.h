@@ -98,9 +98,23 @@ enum class MskVertexUsage {
 	Color
 };
 
+struct MskFace {
+public:
+	std::vector<GLshort> indices;
+};
+
+struct MskMaterial {
+public:
+	glm::vec3 ambient;
+	glm::vec3 diffuse;
+	glm::vec3 specular;
+	GLfloat shininess;
+};
+
 struct MskRay : public MskObject
 {
 public:
+	virtual glm::vec3 GetDirection() = 0;
 	virtual GLvoid SetOrigin(glm::vec3 origin) = 0;
 	virtual GLvoid SetDirection(glm::vec3 direction) = 0;
 	virtual GLboolean Intersect(glm::vec3& v0, glm::vec3& v1, glm::vec3& v2, glm::vec3& bary) = 0;
@@ -189,6 +203,9 @@ struct MskMesh : public MskObject {
 	virtual GLvoid Scale(GLfloat x, GLfloat y, GLfloat z) = 0;
 	virtual GLvoid SetVertexAttributes(std::vector<MskVertexAttribute>& vertexAttributes) = 0;
 	virtual GLvoid Update() = 0;
+	virtual std::vector<MskFace>& GetFaces() = 0;
+	virtual std::vector<glm::vec3>& GetTangents() = 0;
+	virtual std::vector<glm::vec3>& GetBitangents() = 0;
 	virtual std::vector<glm::vec3>& GetNormals() = 0;
 	virtual std::vector<glm::vec3>& GetVertices() = 0;
 	virtual std::vector<GLshort>& GetIndices() = 0;
@@ -249,6 +266,9 @@ struct MskScene : public MskObject
 	Event<UpdateEventArgs> Update;
 	Event<ResizeEventArgs> Resize;
 	Event<MouseEventArgs> MouseMove;
+	Event<KeyEventArgs> KeyDown;
+	Event<KeyEventArgs> KeyPress;
+	Event<KeyEventArgs> KeyUp;
 };
 
 struct MskCamera : public MskObject 
@@ -361,9 +381,15 @@ struct MskTextureRenderer : public MskObject
 	virtual GLvoid SetCamera(std::shared_ptr<MskCamera>& camera) = 0;
 	virtual GLvoid SetCamera(glm::mat4& matProj) = 0;
 	virtual GLvoid EnableLighting(GLboolean enable) = 0;
+	virtual GLvoid EnablePOM(GLboolean enable) = 0;
 	virtual GLvoid Draw(std::shared_ptr<MskMesh>& shape) = 0;
 	virtual GLvoid Begin() = 0;
 	virtual GLvoid Begin(std::shared_ptr<MskTexture>& texture) = 0;
+	virtual GLvoid Begin(
+		std::shared_ptr<MskTexture>& diffuse, 
+		std::shared_ptr<MskTexture>& normal, 
+		std::shared_ptr<MskTexture>& height
+	) = 0;
 	virtual GLvoid End() = 0;
 	virtual GLvoid Flush() = 0;
 };

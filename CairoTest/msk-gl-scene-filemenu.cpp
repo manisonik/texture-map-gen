@@ -15,6 +15,7 @@ GLvoid MSceneFileMenu::InitMesh()
 
 	// Resize cube
 	m_pMeshCube->AddCube();
+	m_pMeshCube->SetColor(glm::vec4(0.0f, 1.0f, 1.0f, 0.5f));
 	m_pMeshCube->Scale(1.0f, 1.0f, 1.0f);
 	m_pMeshCube->Update();
 }
@@ -22,7 +23,7 @@ GLvoid MSceneFileMenu::InitMesh()
 void MSceneFileMenu::OnRender(MskObject* sender, EventArgs* e)
 {
 	// Draw cube
-	m_pScene->Begin(m_pCliffTexture);
+	m_pScene->Begin(m_pCliffDiffuse, m_pCliffNormal, m_pCliffHeight);
 	m_pScene->SetCamera(m_pSceneCamera);
 	m_pScene->Draw(m_pMeshCube);
 	m_pScene->End();
@@ -30,6 +31,7 @@ void MSceneFileMenu::OnRender(MskObject* sender, EventArgs* e)
 	// Draw the grid
 	m_pLineRenderer->Begin();
 	m_pLineRenderer->SetProjectionMatrix(m_pSceneCamera->GetModelViewProjectionMatrix());
+	m_pLineRenderer->Draw(m_pMeshCube);
 	m_pLineRenderer->Draw(m_pMeshGrid);
 	m_pLineRenderer->End();
 
@@ -43,8 +45,10 @@ void MSceneFileMenu::OnRender(MskObject* sender, EventArgs* e)
 	m_pTextRenderer->Begin(m_pFont);
 	m_pTextRenderer->SetProjectionMatrix(m_pCamera->GetModelViewProjectionMatrix());
 	m_pTextRenderer->RenderText("File    Edit    View    Project    Build", -m_nWidth / 2.0f + 10, m_nHeight / 2.0f - 20, 1.0f);
+	m_pTextRenderer->RenderText(glm::to_string(m_pRay->GetDirection()), -m_nWidth / 2.0f + 500, m_nHeight / 2.0f - 20, 1.0f);
 	m_pTextRenderer->End();
 
+	// Start drawing the buttons
 	m_pTextureRenderer->Begin(m_pTexture);
 	m_pTextureRenderer->SetCamera(m_pCamera);
 	for (auto it = m_vButtons.begin(); it != m_vButtons.end(); ++it) {
@@ -85,9 +89,32 @@ void MSceneFileMenu::OnUpdate(MskObject* sender, UpdateEventArgs* e)
 	m_pCamera->Update(e->DeltaTime);
 }
 
+void MSceneFileMenu::OnKeyUp(MskObject* sender, KeyEventArgs* e)
+{
+	if (e->Key == 73) {
+		m_pScene->EnablePOM(false);
+	} else if (e->Key == 79) {
+		m_pScene->EnablePOM(true);
+	}
+}
+
 void MSceneFileMenu::OnMouseMove(MskObject* sender, MouseEventArgs* e)
 {
-	std::shared_ptr<MskRay> ray = m_pCamera->GetRay(e->x, e->y);
+	m_pRay = m_pCamera->GetRay(e->x, e->y);
+
+	// Loop through meshes
+	std::vector<MskFace> faces = m_pMeshCube->GetFaces();
+	std::vector<glm::vec3> vertices = m_pMeshCube->GetVertices();
+	for (auto it = faces.begin(); it != faces.end(); ++it) {
+		glm::vec3 v0 = glm::vec3(glm::vec4(vertices[it->indices[0]], 1.0f) * m_pMeshCube->GetModelMatrix());
+		glm::vec3 v1 = glm::vec3(glm::vec4(vertices[it->indices[1]], 1.0f) * m_pMeshCube->GetModelMatrix());
+		glm::vec3 v2 = glm::vec3(glm::vec4(vertices[it->indices[2]], 1.0f) * m_pMeshCube->GetModelMatrix());
+
+		glm::vec3 bary;
+		if (m_pRay->Intersect(v0, v1, v2, bary)) {
+			::OutputDebugString("Hit!\n");
+		}
+	}
 }
 
 MSceneFileMenu::MSceneFileMenu(MskApp* mskApp)
@@ -104,12 +131,23 @@ MSceneFileMenu::MSceneFileMenu(MskApp* mskApp)
 	mskApp->CreateFTFont("C:\\Windows\\fonts\\arial.ttf", m_pFont);
 	mskApp->CreateTextRenderer(m_pTextRenderer);
 	mskApp->CreateTexture(m_pTexture);
-	mskApp->CreateTexture(m_pCliffTexture);
+	mskApp->CreateTexture(m_pCliffDiffuse);
+	mskApp->CreateTexture(m_pCliffNormal);
+	mskApp->CreateTexture(m_pCliffHeight);
 	mskApp->CreateCairo(m_pCairo);
 
 	// Add texture
-	m_pCliffTexture->SetFilter(MskTextureFilter::MipMapLinearLinear, MskTextureFilter::MipMapLinearLinear);
-	m_pCliffTexture->LoadFromFile("cliff02.png");
+	m_pCliffDiffuse->SetFilter(MskTextureFilter::MipMapLinearLinear, MskTextureFilter::MipMapLinearLinear);
+	m_pCliffDiffuse->LoadFromFile("cliff02.png");
+
+	m_pCliffNormal->SetFilter(MskTextureFilter::MipMapLinearLinear, MskTextureFilter::MipMapLinearLinear);
+	m_pCliffNormal->LoadFromFile("cliff02_normal.png");
+
+	m_pCliffHeight->SetFilter(MskTextureFilter::MipMapLinearLinear, MskTextureFilter::MipMapLinearLinear);
+	m_pCliffHeight->LoadFromFile("cliff02_disp.png");
+
+	// Get ray
+	m_pRay = m_pCamera->GetRay(0.0f, 0.0f);
 
 	// Store camera
 	m_pSceneCamera = mskApp->GetCamera();
@@ -146,10 +184,11 @@ MSceneFileMenu::MSceneFileMenu(MskApp* mskApp)
 	m_pCamera->SetMode(0);
 
 	// Register events
-	Render += EventHandler<EventArgs>(this, &MSceneFileMenu::OnRender);
-	Resize += EventHandler<ResizeEventArgs>(this, &MSceneFileMenu::OnResize);
-	Update += EventHandler<UpdateEventArgs>(this, &MSceneFileMenu::OnUpdate);
-	MouseMove += EventHandler<MouseEventArgs>(this, &MSceneFileMenu::OnMouseMove);
+	Render += EventHandler(this, &MSceneFileMenu::OnRender);
+	Resize += EventHandler(this, &MSceneFileMenu::OnResize);
+	Update += EventHandler(this, &MSceneFileMenu::OnUpdate);
+	MouseMove += EventHandler(this, &MSceneFileMenu::OnMouseMove);
+	KeyUp += EventHandler(this, &MSceneFileMenu::OnKeyUp);
 }
 
 MSceneFileMenu::~MSceneFileMenu()

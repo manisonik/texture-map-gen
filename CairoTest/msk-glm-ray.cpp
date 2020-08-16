@@ -11,6 +11,11 @@ MRay::~MRay()
 {
 }
 
+glm::vec3 MRay::GetDirection()
+{
+	return direction;
+}
+
 GLvoid MRay::SetOrigin(glm::vec3 origin)
 {
 	this->origin = origin;

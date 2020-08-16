@@ -30,12 +30,10 @@ void main()
 	// Fragment position
 	fragPos = vec3(instanceMatrix * vec4(vertexPosition_modelspace, 1.0f));
 
-	//normal = mat3(transpose(inverse(instanceMatrix))) * vertexNormal;
-
 	// Set the TBN matrix
 	vec3 T = normalize(mat3(instanceMatrix) * vertexTangent);
 	vec3 B = normalize(mat3(instanceMatrix) * vertexBitangent);
-	vec3 N = normalize(mat3(instanceMatrix) * vertexTangent);
+	vec3 N = normalize(mat3(instanceMatrix) * vertexNormal);
 	mat3 TBN = transpose(mat3(T, B, N));
 
 	tangentLightPos = TBN * lightPos;

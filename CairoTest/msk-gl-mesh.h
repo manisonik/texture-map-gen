@@ -10,10 +10,13 @@ private:
 		GLuint vertexCount;
 	};
 
+	std::vector<MskFace> m_pFaces;
 	std::vector<Subset> m_pSubset;
 	std::vector<GLshort> m_pIndices;
 	std::vector<glm::vec3> m_pVertices;
 	std::vector<glm::vec3> m_pNormals;
+	std::vector<glm::vec3> m_pTangents;
+	std::vector<glm::vec3> m_pBitangents;
 	std::vector<glm::vec2> m_pTexCoords;
 	std::vector<MskVertexAttribute> m_pVertexAttributes;
 	glm::mat4 m_matScale;
@@ -26,6 +29,7 @@ private:
 	GLuint m_nBaseVertex;
 
 	GLvoid CalculateNormals();
+	GLvoid CalculateTangentBasis();
 public:
 	MMesh();
 	virtual ~MMesh();
@@ -45,7 +49,10 @@ public:
 	GLvoid Scale(GLfloat x, GLfloat y, GLfloat z);
 	GLvoid Update();
 	glm::mat4& GetModelMatrix();
+	std::vector<MskFace>& GetFaces();
 	std::vector<glm::vec3>& GetNormals();
+	std::vector<glm::vec3>& GetTangents();
+	std::vector<glm::vec3>& GetBitangents();
 	std::vector<glm::vec3>& GetVertices();
 	std::vector<GLshort>& GetIndices();
 	std::vector<glm::vec2>& GetTextureCoords();

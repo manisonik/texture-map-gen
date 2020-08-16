@@ -19,6 +19,7 @@ private:
 	GLuint m_hCBO;
 	GLuint m_hIndirectBO;
 	GLuint m_hDrawId;
+	GLuint m_nFirstIndex;
 	GLuint m_nBaseVertex;
 	GLboolean m_bFlush;
 	GLboolean m_bDrawing;
@@ -36,7 +37,7 @@ private:
 	// Store vertex data
 	std::vector<glm::vec3> m_vVertexData;
 	std::vector<glm::vec4> m_vColor;
-	std::vector<GLshort> m_vIndexData;
+	std::vector<GLushort> m_vIndexData;
 	std::vector<DrawElementsCommand> m_vIndirectData;
 	std::vector<glm::mat4> m_vModelMatrices;
 

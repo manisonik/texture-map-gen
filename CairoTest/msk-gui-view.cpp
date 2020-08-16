@@ -363,6 +363,10 @@ LRESULT MView::OnProcessMessage(UINT message, WPARAM wParam, LPARAM lParam)
 	{
 		keyEventArgs->Key = wParam;
 		KeyUp(this, keyEventArgs);
+
+		for (auto func = m_pScene.begin(); func != m_pScene.end(); ++func) {
+			(*func)->KeyUp(this, keyEventArgs);
+		}
 	}
 	break;
 	case WM_PAINT:
