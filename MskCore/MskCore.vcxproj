@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{8db42394-ab16-4f34-97ec-b27323e4d065}</ProjectGuid>
+    <RootNamespace>TestApp</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>MskCore</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+    <CLRSupport>false</CLRSupport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>C:\Users\hooke\source\repos\Cairo\DCEL;C:\Users\hooke\source\repos\Cairo\GLew\include;C:\Users\hooke\source\repos\Cairo\FreeType\include;C:\Users\hooke\source\repos\Cairo\Zlib\include;C:\Users\hooke\source\repos\Cairo\Libpng\include;C:\Users\hooke\source\repos\Cairo\CairoSrc\include;C:\Users\hooke\source\repos\Cairo\\DevIL\include;$(IncludePath)</IncludePath>
+    <ExecutablePath>C:\Users\hooke\source\repos\Cairo\DevIL\lib\x86\Release;C:\Users\hooke\source\repos\Cairo\CairoSrc\bin;C:\Users\hooke\source\repos\Cairo\GLew\bin\Release\Win32;C:\Users\hooke\source\repos\Cairo\Zlib\bin;C:\Users\hooke\source\repos\Cairo\Libpng\bin;C:\Users\hooke\source\repos\Cairo\FreeType\bin;$(ExecutablePath)</ExecutablePath>
+    <LibraryPath>C:\Users\hooke\source\repos\Cairo\Debug;C:\Users\hooke\source\repos\Cairo\GLew\lib\Release\Win32;C:\Users\hooke\source\repos\Cairo\\DevIL\lib\x86\Release;C:\Users\hooke\source\repos\Cairo\FreeType\lib;C:\Users\hooke\source\repos\Cairo\Zlib\lib;C:\Users\hooke\source\repos\Cairo\Pixman\lib;C:\Users\hooke\source\repos\Cairo\Libpng\lib;C:\Users\hooke\source\repos\Cairo\CairoSrc\lib;$(LibraryPath)</LibraryPath>
+    <EnableManagedIncrementalBuild>false</EnableManagedIncrementalBuild>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <ExecutablePath>C:\Users\hooke\source\repos\Cairo\GLew\bin\Release\Win32;$(ExecutablePath)</ExecutablePath>
+    <IncludePath>C:\Users\hooke\source\repos\Cairo\GLew\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\hooke\source\repos\Cairo\GLew\lib\Release\Win32;C:\Users\hooke\source\repos\Cairo\Release;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;CAIRO_HAS_GL_SURFACE;CAIRO_HAS_WGL_FUNCTIONS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <LanguageStandard_C>Default</LanguageStandard_C>
+      <CompileAsManaged>false</CompileAsManaged>
+      <LanguageStandard>Default</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>Cairo.lib;Glew32.lib;opengl32.lib;glu32.lib;zlibwapi.lib;Comctl32.lib;Gdiplus.lib;libpng16.lib;freetype.lib;DevIL.lib;ILU.lib;ILUT.lib;DCEL.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>Glew32.lib;opengl32.lib;glu32.lib;dcel.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="msk-app.cpp" />
+    <ClCompile Include="msk-gl-font.cpp" />
+    <ClCompile Include="msk-gl-fragment.cpp" />
+    <ClCompile Include="msk-gl-main-scene.cpp" />
+    <ClCompile Include="msk-gl-material.cpp" />
+    <ClCompile Include="msk-gl-multisampleframerenderer.cpp" />
+    <ClCompile Include="msk-gl-renderer.cpp" />
+    <ClCompile Include="msk-gl-mesh.cpp" />
+    <ClCompile Include="msk-gl-mesh-builder.cpp" />
+    <ClCompile Include="msk-gl-line-renderer.cpp" />
+    <ClCompile Include="msk-gl-scene.cpp" />
+    <ClCompile Include="msk-gl-shader.cpp" />
+    <ClCompile Include="msk-gl-shaderprogram.cpp" />
+    <ClCompile Include="msk-gl-spritebatch.cpp" />
+    <ClCompile Include="msk-gl-stencil-renderer.cpp" />
+    <ClCompile Include="msk-gl-text-renderer.cpp" />
+    <ClCompile Include="msk-gl-text.cpp" />
+    <ClCompile Include="msk-gl-texture.cpp" />
+    <ClCompile Include="msk-gl-texturedata.cpp" />
+    <ClCompile Include="msk-gl-textureregion.cpp" />
+    <ClCompile Include="msk-glm-camera.cpp" />
+    <ClCompile Include="msk-glm-mousepicker.cpp" />
+    <ClCompile Include="msk-glm-ray.cpp" />
+    <ClCompile Include="msk-object.cpp" />
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="msk-core.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="msk-app.h" />
+    <ClInclude Include="msk-enum.h" />
+    <ClInclude Include="msk-event.h" />
+    <ClInclude Include="msk-eventhandler.h" />
+    <ClInclude Include="msk-eventargs.h" />
+    <ClInclude Include="msk-gl-font.h" />
+    <ClInclude Include="msk-gl-fragment.h" />
+    <ClInclude Include="msk-gl-main-scene.h" />
+    <ClInclude Include="msk-gl-material.h" />
+    <ClInclude Include="msk-gl-multisampleframerenderer.h" />
+    <ClInclude Include="msk-gl-renderer.h" />
+    <ClInclude Include="msk-gl-mesh.h" />
+    <ClInclude Include="msk-gl-mesh-builder.h" />
+    <ClInclude Include="msk-gl-line-renderer.h" />
+    <ClInclude Include="msk-gl-scene.h" />
+    <ClInclude Include="msk-gl-shader.h" />
+    <ClInclude Include="msk-gl-shaderprogram.h" />
+    <ClInclude Include="msk-gl-spritebatch.h" />
+    <ClInclude Include="msk-gl-stencil-renderer.h" />
+    <ClInclude Include="msk-gl-text-renderer.h" />
+    <ClInclude Include="msk-gl-text.h" />
+    <ClInclude Include="msk-gl-texture.h" />
+    <ClInclude Include="msk-gl-texturedata.h" />
+    <ClInclude Include="msk-gl-textureregion.h" />
+    <ClInclude Include="msk-glm-camera.h" />
+    <ClInclude Include="msk-glm-mousepicker.h" />
+    <ClInclude Include="msk-glm-ray.h" />
+    <ClInclude Include="msk-object.h" />
+    <ClInclude Include="msk-structs.h" />
+    <ClInclude Include="stdafx.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

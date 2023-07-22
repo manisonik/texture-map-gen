@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{8DD9F19D-FA4F-4547-B87C-F2D6552BA310}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>TextureMapGen</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <ExecutablePath>C:\Users\hooke\source\repos\Cairo\TextureMapGen\DevIL\lib\x86\Release;C:\Users\hooke\source\repos\Cairo\Zlib\include;C:\Users\hooke\source\repos\Cairo\CairoSrc\bin;C:\Users\hooke\source\repos\Cairo\Zlib\bin;C:\Users\hooke\source\repos\Cairo\Libpng\bin;C:\Users\hooke\source\repos\Cairo\GLew\bin\Release\Win32;C:\Users\hooke\source\repos\Cairo\FreeType\bin;$(ExecutablePath)</ExecutablePath>
+    <IncludePath>C:\Users\hooke\source\repos\Cairo\TextureMapGen\DevIL\include;C:\Users\hooke\source\repos\Cairo\FreeType\include;C:\Users\hooke\source\repos\Cairo\Zlib\include;C:\Users\hooke\source\repos\Cairo\Libpng\include;C:\Users\hooke\source\repos\Cairo\GLew\include;C:\Users\hooke\source\repos\Cairo\CairoSrc\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\hooke\source\repos\Cairo\TextureMapGen\DevIL\lib\x86\Release;C:\Users\hooke\source\repos\Cairo\FreeType\lib;C:\Users\hooke\source\repos\Cairo\GLew\lib\Release\Win32;C:\Users\hooke\source\repos\Cairo\Zlib\lib;C:\Users\hooke\source\repos\Cairo\Pixman\lib;C:\Users\hooke\source\repos\Cairo\Libpng\lib;C:\Users\hooke\source\repos\Cairo\GLew\bin\Release\Win32;C:\Users\hooke\source\repos\Cairo\CairoSrc\lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;CAIRO_HAS_GL_SURFACE;CAIRO_HAS_WGL_FUNCTIONS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>Cairo.lib;Glew32.lib;opengl32.lib;glu32.lib;zlibwapi.lib;Comctl32.lib;Gdiplus.lib;libpng16.lib;freetype.lib;DevIL.lib;ILU.lib;ILUT.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="msk-cairo.h" />
+    <ClInclude Include="msk-core.h" />
+    <ClInclude Include="msk-event.h" />
+    <ClInclude Include="msk-eventargs.h" />
+    <ClInclude Include="msk-eventhandler.h" />
+    <ClInclude Include="msk-gl-font.h" />
+    <ClInclude Include="msk-gl-framerenderer.h" />
+    <ClInclude Include="msk-gl-linerenderer.h" />
+    <ClInclude Include="msk-gl-manifold.h" />
+    <ClInclude Include="msk-gl-mesh-builder.h" />
+    <ClInclude Include="msk-gl-multisampleframerenderer.h" />
+    <ClInclude Include="msk-gl-scene-filemenu.h" />
+    <ClInclude Include="msk-gl-stencilrenderer.h" />
+    <ClInclude Include="msk-gl-textureatlas.h" />
+    <ClInclude Include="msk-gl-textureregion.h" />
+    <ClInclude Include="msk-gl-texturerenderer.h" />
+    <ClInclude Include="msk-gl-shader.h" />
+    <ClInclude Include="msk-gl-shaderprogram.h" />
+    <ClInclude Include="msk-gl-mesh.h" />
+    <ClInclude Include="msk-gl-shaperenderer.h" />
+    <ClInclude Include="msk-gl-text.h" />
+    <ClInclude Include="msk-gl-textrenderer.h" />
+    <ClInclude Include="msk-gl-texture.h" />
+    <ClInclude Include="msk-gl-vertexarray.h" />
+    <ClInclude Include="msk-gl-vertexattributes.h" />
+    <ClInclude Include="msk-glm-mousepicker.h" />
+    <ClInclude Include="msk-gui-control.h" />
+    <ClInclude Include="msk-gui-icon.h" />
+    <ClInclude Include="msk-gui-image.h" />
+    <ClInclude Include="msk-gui-oglwindow.h" />
+    <ClInclude Include="msk-gui-view.h" />
+    <ClInclude Include="msk-main.h" />
+    <ClInclude Include="msk-cairo-object.h" />
+    <ClInclude Include="msk-cairo-rectangle.h" />
+    <ClInclude Include="msk-glm-camera.h" />
+    <ClInclude Include="msk-glm-ray.h" />
+    <ClInclude Include="msk-object.h" />
+    <ClInclude Include="msk-app.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="targetver.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="msk-cairo.cpp" />
+    <ClCompile Include="msk-core.cpp" />
+    <ClCompile Include="msk-event.cpp" />
+    <ClCompile Include="msk-eventargs.cpp" />
+    <ClCompile Include="msk-eventhandler.cpp" />
+    <ClCompile Include="msk-gl-font.cpp" />
+    <ClCompile Include="msk-gl-framerenderer.cpp" />
+    <ClCompile Include="msk-gl-linerenderer.cpp" />
+    <ClCompile Include="msk-gl-manifold.cpp" />
+    <ClCompile Include="msk-gl-mesh-builder.cpp" />
+    <ClCompile Include="msk-gl-multisampleframerenderer.cpp" />
+    <ClCompile Include="msk-gl-scene-filemenu.cpp" />
+    <ClCompile Include="msk-gl-stencilrenderer.cpp" />
+    <ClCompile Include="msk-gl-textureatlas.cpp" />
+    <ClCompile Include="msk-gl-textureregion.cpp" />
+    <ClCompile Include="msk-gl-texturerenderer.cpp" />
+    <ClCompile Include="msk-gl-shader.cpp" />
+    <ClCompile Include="msk-gl-shaderprogram.cpp" />
+    <ClCompile Include="msk-gl-mesh.cpp" />
+    <ClCompile Include="msk-gl-shaperenderer.cpp" />
+    <ClCompile Include="msk-gl-text.cpp" />
+    <ClCompile Include="msk-gl-textrenderer.cpp" />
+    <ClCompile Include="msk-gl-texture.cpp" />
+    <ClCompile Include="msk-gl-vertexarray.cpp" />
+    <ClCompile Include="msk-gl-vertexattributes.cpp" />
+    <ClCompile Include="msk-glm-mousepicker.cpp" />
+    <ClCompile Include="msk-gui-control.cpp" />
+    <ClCompile Include="msk-gui-icon.cpp" />
+    <ClCompile Include="msk-gui-image.cpp" />
+    <ClCompile Include="msk-gui-oglwindow.cpp" />
+    <ClCompile Include="msk-gui-view.cpp" />
+    <ClCompile Include="msk-main.cpp" />
+    <ClCompile Include="msk-cairo-object.cpp" />
+    <ClCompile Include="msk-cairo-rectangle.cpp" />
+    <ClCompile Include="msk-glm-camera.cpp" />
+    <ClCompile Include="msk-glm-ray.cpp" />
+    <ClCompile Include="msk-object.cpp" />
+    <ClCompile Include="msk-app.cpp" />
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="TextureMapGen.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="TextureMapGen.ico" />
+    <Image Include="small.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="basic_texture.glfs" />
+    <None Include="basic_texture.glvs">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </None>
+    <None Include="material_texture.glfs">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </None>
+    <None Include="material_texture.glvs">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </None>
+    <None Include="pom_texture.glfs" />
+    <None Include="pom_texture.glvs" />
+    <None Include="shader.fs" />
+    <None Include="shader.vs" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

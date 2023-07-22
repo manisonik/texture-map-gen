@@ -1,0 +1,192 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Shaders">
+      <UniqueIdentifier>{6c067a89-b982-45ce-9bc6-8fe5ca1e107a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="msk-gl-mesh.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="msk-gl-mesh-builder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="msk-gl-renderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="msk-gl-line-renderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="msk-core.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="msk-app.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="msk-glm-camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="msk-glm-ray.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="msk-gl-multisampleframerenderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="msk-gl-texture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="msk-gl-shader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="msk-gl-shaderprogram.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="msk-gl-texturedata.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="msk-gl-spritebatch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="msk-gl-textureregion.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="msk-glm-mousepicker.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="msk-gl-stencil-renderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="msk-gl-scene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="msk-gl-main-scene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="msk-gl-material.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="msk-gl-text-renderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="msk-gl-font.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="msk-gl-text.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="msk-gl-fragment.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="msk-object.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="msk-gl-mesh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="msk-gl-mesh-builder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="msk-gl-renderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="msk-gl-line-renderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="msk-app.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="msk-glm-camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="msk-glm-ray.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="msk-gl-multisampleframerenderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="msk-gl-texture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="msk-gl-shader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="msk-gl-shaderprogram.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="msk-gl-texturedata.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="msk-enum.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="msk-gl-spritebatch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="msk-gl-textureregion.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="msk-glm-mousepicker.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="msk-gl-stencil-renderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="msk-gl-scene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="msk-gl-main-scene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="msk-structs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="msk-gl-material.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="msk-gl-text-renderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="msk-gl-font.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="msk-gl-text.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="msk-gl-fragment.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="msk-object.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="msk-event.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="msk-eventhandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="msk-eventargs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
