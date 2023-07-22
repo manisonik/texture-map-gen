@@ -1,0 +1,4 @@
+[submodule "DCEL"]
+	path = DCEL
+	url = https://github.com/manisonik/dcel.git
+	branch = master
