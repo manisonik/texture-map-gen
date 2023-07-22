@@ -6,3 +6,7 @@
 	path = Cairo-Build
 	url = https://github.com/manisonik/cairo-windows
 	branch = master
+[submodule "glm"]
+	path = glm
+	url = https://github.com/g-truc/glm.git
+	branch = master
