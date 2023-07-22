@@ -72,9 +72,9 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <ExecutablePath>C:\Users\hooke\source\repos\Cairo\TextureMapGen\DevIL\lib\x86\Release;C:\Users\hooke\source\repos\Cairo\Zlib\include;C:\Users\hooke\source\repos\Cairo\CairoSrc\bin;C:\Users\hooke\source\repos\Cairo\Zlib\bin;C:\Users\hooke\source\repos\Cairo\Libpng\bin;C:\Users\hooke\source\repos\Cairo\GLew\bin\Release\Win32;C:\Users\hooke\source\repos\Cairo\FreeType\bin;$(ExecutablePath)</ExecutablePath>
-    <IncludePath>C:\Users\hooke\source\repos\Cairo\TextureMapGen\DevIL\include;C:\Users\hooke\source\repos\Cairo\FreeType\include;C:\Users\hooke\source\repos\Cairo\Zlib\include;C:\Users\hooke\source\repos\Cairo\Libpng\include;C:\Users\hooke\source\repos\Cairo\GLew\include;C:\Users\hooke\source\repos\Cairo\CairoSrc\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\hooke\source\repos\Cairo\TextureMapGen\DevIL\lib\x86\Release;C:\Users\hooke\source\repos\Cairo\FreeType\lib;C:\Users\hooke\source\repos\Cairo\GLew\lib\Release\Win32;C:\Users\hooke\source\repos\Cairo\Zlib\lib;C:\Users\hooke\source\repos\Cairo\Pixman\lib;C:\Users\hooke\source\repos\Cairo\Libpng\lib;C:\Users\hooke\source\repos\Cairo\GLew\bin\Release\Win32;C:\Users\hooke\source\repos\Cairo\CairoSrc\lib;$(LibraryPath)</LibraryPath>
+    <ExecutablePath>$(SolutionDir)Cairo-Build\zlib\bin;$(SolutionDir)Cairo-Build\libpng\bin;$(SolutionDir)Cairo-Build\freeType\bin;$(SolutionDir)\GLew\bin\Release\Win32;$(ExecutablePath)</ExecutablePath>
+    <IncludePath>$(SolutionDir)Cairo-Build\FreeType\include;$(SolutionDir)Cairo-Build\zlib\include;$(SolutionDir)Cairo-Build\libpng\include;$(SolutionDir)Cairo-Build\cairo\src;$(SolutionDir)GLew\include;$(SolutionDir)DevIL\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)Cairo-Build\FreeType\lib;$(SolutionDir)Cairo-Build\Zlib\lib;$(SolutionDir)Cairo-Build\Pixman\lib;$(SolutionDir)Cairo-Build\Libpng\lib;$(SolutionDir)Cairo-Build\cairo\src\lib;$(SolutionDir)GLew\lib\Release\Win32;$(SolutionDir)DevIL\lib\x86\Release;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>

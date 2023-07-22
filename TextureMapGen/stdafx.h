@@ -48,14 +48,14 @@
 #include <algorithm>
 
 // GLM
-#include "./glm/glm.hpp"
-#include "./glm/gtc/matrix_transform.hpp"
-#include "./glm/gtx/matrix_transform_2d.hpp"
-#include "./glm/gtx/transform.hpp"
-#include "./glm/gtx/intersect.hpp"
-#include "./glm/gtc/type_ptr.hpp"
-#include "./glm/gtx/normal.hpp"
-#include "./glm/gtx/string_cast.hpp"
+#include "glm/glm.hpp"
+#include "glm/gtc/matrix_transform.hpp"
+#include "glm/gtx/matrix_transform_2d.hpp"
+#include "glm/gtx/transform.hpp"
+#include "glm/gtx/intersect.hpp"
+#include "glm/gtc/type_ptr.hpp"
+#include "glm/gtx/normal.hpp"
+#include "glm/gtx/string_cast.hpp"
 
 // Opengl
 #include <gl/glew.h>
