@@ -1,10 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
-VisualStudioVersion = 16.0.30406.217
+VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Cairo", "Cairo\Cairo.vcxproj", "{61070B97-6566-4533-B58B-3922B7A68FB3}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Pixman", "..\Pixman\Pixman\Pixman.vcxproj", "{AB95137A-C4F6-4F45-B8A1-74149D7632C0}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TextureMapGen", "TextureMapGen\TextureMapGen.vcxproj", "{8DD9F19D-FA4F-4547-B87C-F2D6552BA310}"
@@ -26,16 +24,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{61070B97-6566-4533-B58B-3922B7A68FB3}.Debug|Any CPU.ActiveCfg = Debug|Win32
-		{61070B97-6566-4533-B58B-3922B7A68FB3}.Debug|x64.ActiveCfg = Debug|x64
-		{61070B97-6566-4533-B58B-3922B7A68FB3}.Debug|x64.Build.0 = Debug|x64
-		{61070B97-6566-4533-B58B-3922B7A68FB3}.Debug|x86.ActiveCfg = Debug|Win32
-		{61070B97-6566-4533-B58B-3922B7A68FB3}.Debug|x86.Build.0 = Debug|Win32
-		{61070B97-6566-4533-B58B-3922B7A68FB3}.Release|Any CPU.ActiveCfg = Release|Win32
-		{61070B97-6566-4533-B58B-3922B7A68FB3}.Release|x64.ActiveCfg = Release|x64
-		{61070B97-6566-4533-B58B-3922B7A68FB3}.Release|x64.Build.0 = Release|x64
-		{61070B97-6566-4533-B58B-3922B7A68FB3}.Release|x86.ActiveCfg = Release|Win32
-		{61070B97-6566-4533-B58B-3922B7A68FB3}.Release|x86.Build.0 = Release|Win32
 		{AB95137A-C4F6-4F45-B8A1-74149D7632C0}.Debug|Any CPU.ActiveCfg = Debug|Win32
 		{AB95137A-C4F6-4F45-B8A1-74149D7632C0}.Debug|x64.ActiveCfg = Debug|x64
 		{AB95137A-C4F6-4F45-B8A1-74149D7632C0}.Debug|x64.Build.0 = Debug|x64

@@ -2,7 +2,7 @@
 	path = DCEL
 	url = https://github.com/manisonik/dcel.git
 	branch = master
-[submodule "Cairo"]
-	path = Cairo
-	url = git://anongit.freedesktop.org/git/cairo
-	branch = 1.8
+[submodule "Cairo-Build"]
+	path = Cairo-Build
+	url = https://github.com/manisonik/cairo-windows
+	branch = master
