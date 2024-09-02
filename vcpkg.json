@@ -1,0 +1,17 @@
+{
+  "dependencies": [
+    "cairo",
+    "freetype",
+    "dcel",
+    {
+    "name": "devil",
+      "features": ["libpng", "lcms", "openexr", "tiff"],
+      "default-features": false
+    },
+    "glew",
+    "glm",
+    "eigen3",
+    "spdlog",
+    "glfw3"
+  ]
+}
